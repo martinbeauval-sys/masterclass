@@ -105,7 +105,7 @@ footer a{color:inherit}
     <h2>Tu as déjà <em>une conciergerie</em> ?</h2>
     <div class="opts">
       <button class="opt" onclick="answer('situation','oui','dc')">Oui, j'ai déjà au moins un logement en gestion <span class="ar">→</span></button>
-      <button class="opt" onclick="answer('situation','non','em')">Non, pas encore <span class="ar">→</span></button>
+      <button class="opt" onclick="answer('situation','non','yt')">Non, pas encore <span class="ar">→</span></button>
     </div>
   </section>
 
@@ -134,10 +134,20 @@ footer a{color:inherit}
       <span class="play"><svg viewBox="0 0 24 24" fill="#1A1918"><path d="M8 5v14l11-7z"/></svg></span>
       
     </div>
+    <div id="yt-apres">
     <h1>Ta vidéo <em>est prête</em>.</h1>
     <p class="sub">Regarde-la d'une traite : les 7 étapes, de « pas de CDI » à ton premier appartement.</p>
     <a class="cta" href="https://www.youtube.com/watch?v=1Frg6TyA8AQ">Accède à la vidéo&nbsp;→</a>
     <p class="strong"><span>✓ Offerte</span><span>✓ Sans inscription</span></p>
+    <p class="fine"><a href="https://app.iclosed.io/e/automation/etude-de-march-gratuite-youtube" style="color:inherit">Tu veux savoir si une conciergerie peut être rentable sur ton secteur ? Réserve une étude de marché offerte</a></p>
+    </div>
+    <div id="yt-avant" style="display:none">
+    <h1>Ta vidéo sort <em>dimanche à 12 h</em>.</h1>
+    <p class="sub">Les 7 étapes, de « pas de CDI » à ton premier appartement. Ce lien s'active dimanche 4 octobre à 12 h : garde-le, ou abonne-toi pour la recevoir à la sortie.</p>
+    <a class="cta" href="https://www.youtube.com/@martinbeauval.conciergelite?sub_confirmation=1">M'abonner pour la recevoir&nbsp;→</a>
+    <p class="strong"><span>✓ Offerte</span><span>✓ Sans inscription</span></p>
+    <p class="fine"><a href="https://app.iclosed.io/e/automation/etude-de-march-gratuite-youtube" style="color:inherit">En attendant : savoir si une conciergerie peut être rentable sur ton secteur, étude de marché offerte</a></p>
+    </div>
   </section>
 
   <!-- FIN B · COMMUNAUTÉ -->
@@ -165,7 +175,9 @@ const YT="https://www.youtube.com/watch?v=1Frg6TyA8AQ", DC="https://chat.whatsap
 const answers={};
 const history=[];
 window.dataLayer=window.dataLayer||[];
+const SORTIE=Date.UTC(2026,9,4,10,0,0);
 function show(id){
+  if(id==='yt'){const avant=Date.now()<SORTIE; document.getElementById('yt-avant').style.display=avant?'':'none'; document.getElementById('yt-apres').style.display=avant?'none':''; if(avant){document.querySelector('#s-yt .thumb').onclick=null;}}
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
   const el=document.getElementById('s-'+id); el.classList.add('on');
   const step=el.dataset.step;
